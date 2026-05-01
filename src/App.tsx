@@ -22,13 +22,13 @@ function useInView(threshold = 0.15) {
 // ── Ticker logos data ──
 const PARTNER_LOGOS = [
   { name: "Sofitel Marrakech", logo: "https://sofitel.accor.com/content/dam/brands/sof/global-marketing/brand-identity/logos/new-logo/Sofitel_CL_Gold.svg" },
-  { name: "Hyatt Regency Casablanca", logo: "https://logo.clearbit.com/hyatt.com" },
-  { name: "Radisson Blu Rabat", logo: "https://logo.clearbit.com/radissonhotels.com" },
-  { name: "Four Seasons Marrakech", logo: "https://logo.clearbit.com/fourseasons.com" },
-  { name: "Le Méridien Agadir", logo: "https://logo.clearbit.com/marriott.com" },
-  { name: "Kenzi Hotels", logo: "https://logo.clearbit.com/kenzi-hotels.com" },
-  { name: "Ibis Casablanca", logo: "https://logo.clearbit.com/ibis.accor.com" },
-  { name: "Novotel Fès", logo: "https://logo.clearbit.com/novotel.accor.com" },
+  { name: "Hyatt Regency Casablanca", logo: "https://www.hyatt.com/t/favicons/apple-touch-icon.png" },
+  { name: "Radisson Blu Rabat", logo: "https://www.radissonhotels.com/statics/webextras/public/favicons/apple-touch-icon.png" },
+  { name: "Four Seasons Marrakech", logo: "https://www.fourseasons.com/alt/fshr/design3/images/favicon/apple-touch-icon.png" },
+  { name: "Riu Palace Tikida Agadir", logo: "https://www.riu.com/hotel/assets/favicon/apple-touch-icon.png" },
+  { name: "Kenzi Hotels", logo: "https://image-tc.galaxy.tf/wisvg-9lk4xzde55nno9mupujx82hxf/kenzitowerhotel-scroll.svg" },
+  { name: "Ibis Casablanca", logo: "https://all.accor.com/fact-sheet/assets/icons/brands/icons/color/ibh.svg" },
+  { name: "Fes Marriott Hotel Jnane Palace", logo: "https://cache.marriott.com/content/dam/marriott-digital/mc/global-property-shared/en_us/logo/assets/mc-logo-econfo.png" },
 ];
 
 // ── Steps data ──
@@ -131,10 +131,10 @@ function CTAButton({ size = "lg", className = "" }: { size?: "sm" | "lg"; classN
       rel="noopener noreferrer"
       className={`
         inline-flex items-center justify-center gap-2 font-bold rounded-xl
-        bg-[#b4dc02] text-[#003a57] shadow-lg shadow-lime-200
+        bg-[#b4dc02] text-[#003a57]
         hover:bg-[#c8f002] hover:scale-[1.03] active:scale-[0.98]
         transition-all duration-200 cursor-pointer select-none
-        ${size === "lg" ? "text-lg px-8 py-4 min-w-[280px] md:min-w-[320px]" : "text-base px-6 py-3"}
+        ${size === "lg" ? "text-base sm:text-lg px-6 sm:px-8 py-4 w-full sm:w-auto sm:min-w-[320px]" : "text-base px-6 py-3"}
         ${className}
       `}
     >
@@ -147,21 +147,11 @@ function CTAButton({ size = "lg", className = "" }: { size?: "sm" | "lg"; classN
 }
 
 // ── Logo ──
-function Logo() {
+function Logo({ variant = 'default' }: { variant?: 'default' | 'white' } = {}) {
+  const src = variant === 'white' ? "/images/coincarriere-logo-white.png" : "/images/coincarriere-logo.png";
   return (
-    <div className="flex items-center gap-2">
-      <div className="relative">
-        <div className="w-9 h-9 rounded-lg bg-[#0077B6] flex items-center justify-center shadow-md">
-          <svg viewBox="0 0 32 32" fill="none" className="w-6 h-6">
-            <circle cx="16" cy="16" r="12" fill="#b4dc02" />
-            <circle cx="16" cy="16" r="8" fill="#0077B6" />
-            <text x="16" y="21" textAnchor="middle" fill="#b4dc02" fontSize="11" fontWeight="bold" fontFamily="Inter, sans-serif">C</text>
-          </svg>
-        </div>
-      </div>
-      <span className="text-xl font-extrabold tracking-tight text-[#0077B6]">
-        Coin<span className="text-[#b4dc02]">Carrière</span>
-      </span>
+    <div className="flex items-center">
+      <img src={src} alt="CoinCarrière Logo" className="h-8 object-contain" />
     </div>
   );
 }
@@ -278,7 +268,7 @@ export default function App() {
             href={CTA_LINK}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 bg-[#0077B6] text-white font-bold rounded-lg px-4 py-2 text-sm hover:bg-[#005a8e] transition-colors shadow-sm"
+            className="inline-flex items-center gap-1.5 bg-[#0077B6] text-white font-bold rounded-lg px-4 py-2 text-sm hover:bg-[#005a8e] transition-colors"
           >
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4">
               <path d="M12 20h9" /><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" />
@@ -346,26 +336,34 @@ export default function App() {
             </p>
 
             {/* CTA block */}
-            <div className="flex flex-col items-start gap-2 pt-1">
+            <div className="flex flex-col items-stretch sm:items-start gap-2 pt-1">
               <CTAButton size="lg" className="w-full sm:w-auto" />
-              <span className="flex items-center gap-1.5 text-white/70 text-sm font-medium">
-                <svg viewBox="0 0 24 24" fill="none" stroke="#b4dc02" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4 shrink-0">
-                  <polyline points="20 6 9 17 4 12" />
-                </svg>
-                Gratuit pour commencer · Aucune carte requise
-              </span>
+              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-6 text-white/70 text-sm font-medium mt-1">
+                <span className="flex items-center gap-2">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="#b4dc02" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4 shrink-0">
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                  Gratuit pour commencer
+                </span>
+                <span className="flex items-center gap-2">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="#b4dc02" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4 shrink-0">
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                  Aucune carte bancaire requise
+                </span>
+              </div>
             </div>
 
             {/* Social proof row */}
             <div className="flex items-center gap-3 pt-1">
               <div className="flex -space-x-2">
-                {["#0077B6", "#005a8e", "#00a8e8", "#b4dc02"].map((c, i) => (
+                {PARTNER_LOGOS.slice(0, 4).map((partner, i) => (
                   <div
                     key={i}
-                    className="w-9 h-9 rounded-full border-2 border-white/60 flex items-center justify-center text-white text-xs font-bold shadow-md"
-                    style={{ backgroundColor: c }}
+                    className="w-9 h-9 rounded-full border-2 border-white/60 flex items-center justify-center bg-white overflow-hidden shadow-md p-0.5"
+                    title={partner.name}
                   >
-                    {["DH", "SM", "KR", "FZ"][i]}
+                    <img src={partner.logo} alt={partner.name} className="w-full h-full object-contain" />
                   </div>
                 ))}
               </div>
@@ -436,13 +434,15 @@ export default function App() {
                 "Depuis que nous utilisons CoinCarrière, nous recevons <strong className="text-[#0077B6] not-italic">3x plus de candidatures qualifiées</strong> pour notre service en salle. Le pipeline visuel nous fait gagner un temps précieux."
               </blockquote>
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#0077B6] to-[#005a8e] flex items-center justify-center text-white font-bold text-sm">MK</div>
+                <div className="w-10 h-10 rounded-full overflow-hidden shrink-0 border-2 border-[#e0f0fb]">
+                  <img src="/images/testimonial-mk.png" alt="Mohammed K." className="w-full h-full object-cover object-top" />
+                </div>
                 <div>
                   <p className="font-bold text-slate-800 text-sm">Mohammed K.</p>
                   <p className="text-slate-500 text-xs">Gérant de restaurant · Marrakech</p>
                 </div>
-                <div className="ml-auto">
-                  <span className="bg-[#e8f4fd] text-[#0077B6] text-xs font-semibold px-3 py-1 rounded-full">Client vérifié</span>
+                <div className="ml-auto shrink-0">
+                  <span className="bg-[#e8f4fd] text-[#0077B6] text-xs font-semibold px-3 py-1 rounded-full whitespace-nowrap">Client vérifié</span>
                 </div>
               </div>
             </div>
@@ -625,12 +625,20 @@ export default function App() {
           {/* CTA */}
           <div className="flex flex-col items-center gap-3">
             <CTAButton size="lg" />
-            <span className="flex items-center gap-2 text-slate-500 text-sm">
-              <svg viewBox="0 0 24 24" fill="none" stroke="#b4dc02" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4 shrink-0">
-                <polyline points="20 6 9 17 4 12" />
-              </svg>
-              Gratuit pour commencer · Configuration en 5 minutes
-            </span>
+            <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-6 text-slate-500 text-sm mt-1">
+              <span className="flex items-center gap-2">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#b4dc02" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4 shrink-0">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
+                Gratuit pour commencer
+              </span>
+              <span className="flex items-center gap-2">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#b4dc02" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4 shrink-0">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
+                Configuration en 5 minutes
+              </span>
+            </div>
           </div>
 
           {/* Trust badges */}
@@ -653,7 +661,7 @@ export default function App() {
       {/* ── FOOTER ── */}
       <footer className="bg-[#003a57] py-8">
         <div className="max-w-6xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-4">
-          <Logo />
+          <Logo variant="white" />
           <p className="text-white/40 text-sm text-center">
             © {new Date().getFullYear()} CoinCarrière · Tous droits réservés · Maroc
           </p>
