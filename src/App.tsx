@@ -155,7 +155,7 @@ function CTAButton({ size = "lg", className = "" }: { size?: "sm" | "lg"; classN
 
 // ── Logo ──
 function Logo({ variant = 'default' }: { variant?: 'default' | 'white' } = {}) {
-  const src = variant === 'white' ? "/images/coincarriere-logo-white.png" : "/images/coincarriere-logo.png";
+  const src = variant === 'white' ? "/images/coincarriere-logo-white.webp" : "/images/coincarriere-logo.webp";
   return (
     <div className="flex items-center">
       <img src={src} alt="CoinCarrière Logo" className="h-8 w-auto object-contain" width="160" height="32" decoding="async" />
@@ -293,7 +293,7 @@ export default function App() {
 
         {/* ── Full-bleed background image ── */}
         <img
-          src="/images/hero-hotel.jpg"
+          src="/images/hero-hotel.webp"
           alt="Gérant d'hôtel satisfait utilisant CoinCarrière"
           className="absolute inset-0 w-full h-full object-cover object-center"
           decoding="async"
@@ -445,7 +445,7 @@ export default function App() {
               </blockquote>
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-full overflow-hidden shrink-0 border-2 border-[#e0f0fb]">
-                  <img src="/images/testimonial-mk.png" alt="Mohammed K." className="w-full h-full object-cover object-top" loading="lazy" decoding="async" width="40" height="40" />
+                  <img src="/images/testimonial-mk.webp" alt="Mohammed K." className="w-full h-full object-cover object-top" loading="lazy" decoding="async" width="40" height="40" />
                 </div>
                 <div>
                   <p className="font-bold text-slate-800 text-sm">Mohammed K.</p>
@@ -526,7 +526,7 @@ export default function App() {
           {/* Video placeholder */}
           <div className="relative rounded-3xl overflow-hidden shadow-2xl bg-gradient-to-br from-[#003a57] to-[#0077B6] aspect-video flex items-center justify-center group cursor-pointer border-4 border-[#b4dc02]/30">
             <img
-              src="/images/dashboard-preview.jpg"
+              src="/images/dashboard-preview.webp"
               alt="Aperçu de la plateforme CoinCarrière"
               className="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:opacity-50 transition-opacity duration-300"
               loading="lazy"
