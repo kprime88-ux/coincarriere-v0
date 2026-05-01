@@ -158,7 +158,7 @@ function Logo({ variant = 'default' }: { variant?: 'default' | 'white' } = {}) {
   const src = variant === 'white' ? "/images/coincarriere-logo-white.png" : "/images/coincarriere-logo.png";
   return (
     <div className="flex items-center">
-      <img src={src} alt="CoinCarrière Logo" className="h-8 object-contain" />
+      <img src={src} alt="CoinCarrière Logo" className="h-8 w-auto object-contain" width="160" height="32" decoding="async" />
     </div>
   );
 }
@@ -168,7 +168,7 @@ function PartnerBadge({ name, logo }: { name: string; logo: string }) {
   return (
     <div className="flex items-center gap-3 px-5 py-3 rounded-xl border bg-white border-slate-100 shrink-0 shadow-sm">
       <div className="w-8 h-8 flex items-center justify-center shrink-0">
-        <img src={logo} alt={`Logo ${name}`} className="w-full h-full object-contain rounded-sm" />
+        <img src={logo} alt={`Logo ${name}`} className="w-full h-full object-contain rounded-sm" loading="lazy" decoding="async" />
       </div>
       <span className="text-sm font-semibold whitespace-nowrap text-slate-700">{name}</span>
     </div>
@@ -296,6 +296,8 @@ export default function App() {
           src="/images/hero-hotel.jpg"
           alt="Gérant d'hôtel satisfait utilisant CoinCarrière"
           className="absolute inset-0 w-full h-full object-cover object-center"
+          decoding="async"
+          fetchpriority="high"
         />
 
         {/* ── Multi-layer dark overlay for legibility ── */}
@@ -371,7 +373,7 @@ export default function App() {
                     className="w-9 h-9 rounded-full border-2 border-white/60 flex items-center justify-center bg-white overflow-hidden shadow-md p-0.5"
                     title={partner.name}
                   >
-                    <img src={partner.logo} alt={partner.name} className="w-full h-full object-contain" />
+                    <img src={partner.logo} alt={partner.name} className="w-full h-full object-contain" decoding="async" />
                   </div>
                 ))}
               </div>
@@ -443,7 +445,7 @@ export default function App() {
               </blockquote>
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-full overflow-hidden shrink-0 border-2 border-[#e0f0fb]">
-                  <img src="/images/testimonial-mk.png" alt="Mohammed K." className="w-full h-full object-cover object-top" />
+                  <img src="/images/testimonial-mk.png" alt="Mohammed K." className="w-full h-full object-cover object-top" loading="lazy" decoding="async" width="40" height="40" />
                 </div>
                 <div>
                   <p className="font-bold text-slate-800 text-sm">Mohammed K.</p>
@@ -527,6 +529,8 @@ export default function App() {
               src="/images/dashboard-preview.jpg"
               alt="Aperçu de la plateforme CoinCarrière"
               className="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:opacity-50 transition-opacity duration-300"
+              loading="lazy"
+              decoding="async"
             />
             {/* Play button */}
             <div className="relative z-10 flex flex-col items-center gap-4">
