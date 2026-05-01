@@ -297,7 +297,7 @@ export default function App() {
           alt="Gérant d'hôtel satisfait utilisant CoinCarrière"
           className="absolute inset-0 w-full h-full object-cover object-center"
           decoding="async"
-          fetchpriority="high"
+          fetchPriority="high"
         />
 
         {/* ── Multi-layer dark overlay for legibility ── */}
