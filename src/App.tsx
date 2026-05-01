@@ -154,11 +154,11 @@ function CTAButton({ size = "lg", className = "" }: { size?: "sm" | "lg"; classN
 }
 
 // ── Logo ──
-function Logo({ variant = 'default' }: { variant?: 'default' | 'white' } = {}) {
+function Logo({ variant = 'default', className = "" }: { variant?: 'default' | 'white'; className?: string } = {}) {
   const src = variant === 'white' ? "/images/coincarriere-logo-white.webp" : "/images/coincarriere-logo.webp";
   return (
-    <div className="flex items-center">
-      <img src={src} alt="CoinCarrière Logo" className="h-8 w-auto object-contain" width="160" height="32" decoding="async" />
+    <div className={`flex items-center ${className}`}>
+      <img src={src} alt="CoinCarrière Logo" className="h-11 w-auto object-contain" width="220" height="44" decoding="async" />
     </div>
   );
 }
