@@ -263,6 +263,7 @@ function StatCard({ stat, idx }: { stat: typeof STATS[0]; idx: number }) {
 // ══════════════════════════════════════════
 export default function App() {
   const heroInView = useInView(0.05);
+  const [isVideoPlaying, setIsVideoPlaying] = useState(false);
 
   return (
     <div className="font-[Inter,sans-serif] bg-white text-slate-800 overflow-x-hidden">
@@ -523,31 +524,45 @@ export default function App() {
             <p className="text-slate-500">Voyez CoinCarrière en action en moins de 2 minutes.</p>
           </div>
 
-          {/* Video placeholder */}
-          <div className="relative rounded-3xl overflow-hidden shadow-2xl bg-gradient-to-br from-[#003a57] to-[#0077B6] aspect-video flex items-center justify-center group cursor-pointer border-4 border-[#b4dc02]/30">
-            <img
-              src="/images/dashboard-preview.webp"
-              alt="Aperçu de la plateforme CoinCarrière"
-              className="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:opacity-50 transition-opacity duration-300"
-              loading="lazy"
-              decoding="async"
-            />
-            {/* Play button */}
-            <div className="relative z-10 flex flex-col items-center gap-4">
-              <div className="w-20 h-20 rounded-full bg-[#b4dc02] flex items-center justify-center shadow-2xl shadow-lime-400/40 group-hover:scale-110 transition-transform duration-300">
-                <svg viewBox="0 0 24 24" fill="#3a4700" className="w-8 h-8 ml-1">
-                  <polygon points="5 3 19 12 5 21 5 3" />
-                </svg>
+          {/* Video area (loads on click for performance) */}
+          <div className="relative rounded-3xl overflow-hidden shadow-2xl bg-gradient-to-br from-[#003a57] to-[#0077B6] aspect-video flex items-center justify-center border-4 border-[#b4dc02]/30">
+            {!isVideoPlaying ? (
+              <div 
+                className="absolute inset-0 flex items-center justify-center group cursor-pointer"
+                onClick={() => setIsVideoPlaying(true)}
+              >
+                <img
+                  src="/images/dashboard-preview.webp"
+                  alt="Aperçu de la plateforme CoinCarrière"
+                  className="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:opacity-50 transition-opacity duration-300"
+                  loading="lazy"
+                  decoding="async"
+                />
+                {/* Play button */}
+                <div className="relative z-10 flex flex-col items-center gap-4">
+                  <div className="w-20 h-20 rounded-full bg-[#b4dc02] flex items-center justify-center shadow-2xl shadow-lime-400/40 group-hover:scale-110 transition-transform duration-300">
+                    <svg viewBox="0 0 24 24" fill="#3a4700" className="w-8 h-8 ml-1">
+                      <polygon points="5 3 19 12 5 21 5 3" />
+                    </svg>
+                  </div>
+                  <div className="text-center">
+                    <p className="text-white font-bold text-lg">Voir la démo en direct</p>
+                    <p className="text-white/60 text-sm">Durée : 1 min 45 sec</p>
+                  </div>
+                </div>
+                {/* Corner badge */}
+                <div className="absolute top-4 right-4 bg-[#b4dc02] text-[#3a4700] text-xs font-bold px-3 py-1 rounded-full z-10">
+                  GRATUIT
+                </div>
               </div>
-              <div className="text-center">
-                <p className="text-white font-bold text-lg">Voir la démo en direct</p>
-                <p className="text-white/60 text-sm">Durée : 1 min 45 sec</p>
-              </div>
-            </div>
-            {/* Corner badge */}
-            <div className="absolute top-4 right-4 bg-[#b4dc02] text-[#3a4700] text-xs font-bold px-3 py-1 rounded-full">
-              GRATUIT
-            </div>
+            ) : (
+              <video
+                src="/videos/CoinCarriere_Video.mp4"
+                className="w-full h-full object-cover"
+                autoPlay
+                controls
+              />
+            )}
           </div>
 
           {/* Feature highlights below video */}
