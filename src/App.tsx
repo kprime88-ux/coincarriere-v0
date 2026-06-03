@@ -1,4 +1,6 @@
 import { useEffect, useRef, useState } from "react";
+import PrivacyPage from "./Privacy";
+import TermsPage from "./Terms";
 
 const CTA_LINK = "https://coincarriere.com/register?type=company";
 
@@ -262,8 +264,48 @@ function StatCard({ stat, idx }: { stat: typeof STATS[0]; idx: number }) {
 //  MAIN APP
 // ══════════════════════════════════════════
 export default function App() {
+  const [route, setRoute] = useState<"home" | "privacy" | "terms">(() => {
+    const path = window.location.pathname;
+    const search = new URLSearchParams(window.location.search);
+    const hash = window.location.hash;
+
+    if (path === "/privacy" || search.get("page") === "privacy" || hash === "#/privacy") {
+      return "privacy";
+    }
+    if (path === "/terms" || search.get("page") === "terms" || hash === "#/terms") {
+      return "terms";
+    }
+    return "home";
+  });
+
+  useEffect(() => {
+    const handlePopState = () => {
+      const path = window.location.pathname;
+      const search = new URLSearchParams(window.location.search);
+      const hash = window.location.hash;
+
+      if (path === "/privacy" || search.get("page") === "privacy" || hash === "#/privacy") {
+        setRoute("privacy");
+      } else if (path === "/terms" || search.get("page") === "terms" || hash === "#/terms") {
+        setRoute("terms");
+      } else {
+        setRoute("home");
+      }
+    };
+
+    window.addEventListener("popstate", handlePopState);
+    return () => window.removeEventListener("popstate", handlePopState);
+  }, []);
+
   const heroInView = useInView(0.05);
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
+
+  if (route === "privacy") {
+    return <PrivacyPage />;
+  }
+  if (route === "terms") {
+    return <TermsPage />;
+  }
 
   return (
     <div className="font-[Inter,sans-serif] bg-white text-slate-800 overflow-x-hidden">
@@ -349,7 +391,7 @@ export default function App() {
             {/* CTA block */}
             <div className="flex flex-col items-stretch sm:items-start gap-2 pt-1">
               <CTAButton size="lg" className="w-full sm:w-auto" />
-              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-6 text-white/70 text-sm font-medium mt-1">
+              {/*<div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-6 text-white/70 text-sm font-medium mt-1">
                 <span className="flex items-center gap-2">
                   <svg viewBox="0 0 24 24" fill="none" stroke="#b4dc02" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4 shrink-0">
                     <polyline points="20 6 9 17 4 12" />
@@ -362,7 +404,7 @@ export default function App() {
                   </svg>
                   Aucune carte bancaire requise
                 </span>
-              </div>
+              </div>*/}
             </div>
 
             {/* Social proof row */}
@@ -527,7 +569,7 @@ export default function App() {
           {/* Video area (loads on click for performance) */}
           <div className="relative rounded-3xl overflow-hidden shadow-2xl bg-gradient-to-br from-[#003a57] to-[#0077B6] aspect-video flex items-center justify-center border-4 border-[#b4dc02]/30">
             {!isVideoPlaying ? (
-              <div 
+              <div
                 className="absolute inset-0 flex items-center justify-center group cursor-pointer"
                 onClick={() => setIsVideoPlaying(true)}
               >
@@ -652,7 +694,7 @@ export default function App() {
           {/* CTA */}
           <div className="flex flex-col items-center gap-3">
             <CTAButton size="lg" />
-            <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-6 text-slate-500 text-sm mt-1">
+            {/*<div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-6 text-slate-500 text-sm mt-1">
               <span className="flex items-center gap-2">
                 <svg viewBox="0 0 24 24" fill="none" stroke="#b4dc02" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4 shrink-0">
                   <polyline points="20 6 9 17 4 12" />
@@ -665,7 +707,7 @@ export default function App() {
                 </svg>
                 Configuration en 5 minutes
               </span>
-            </div>
+            </div>*/}
           </div>
 
           {/* Trust badges */}
@@ -693,13 +735,28 @@ export default function App() {
             © {new Date().getFullYear()} CoinCarrière · Tous droits réservés · Maroc
           </p>
           <div className="flex gap-4">
-            {[
-              { label: "Confidentialité", href: "#" },
-              { label: "CGU", href: "#" },
-              { label: "Contact", href: "#" },
-            ].map((l) => (
-              <a key={l.label} href={l.href} className="text-white/40 hover:text-white/80 text-sm transition-colors">{l.label}</a>
-            ))}
+            <a
+              href="/privacy"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white/40 hover:text-white/80 text-sm transition-colors"
+            >
+              Confidentialité
+            </a>
+            <a
+              href="/terms"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white/40 hover:text-white/80 text-sm transition-colors"
+            >
+              CGU
+            </a>
+            <a
+              href="mailto:contact@coincarriere.com"
+              className="text-white/40 hover:text-white/80 text-sm transition-colors"
+            >
+              Contact
+            </a>
           </div>
         </div>
       </footer>
