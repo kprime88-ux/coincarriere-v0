@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import PrivacyPage from "./Privacy";
 import TermsPage from "./Terms";
 
-const CTA_LINK = "https://coincarriere.com/register?type=company";
+const CTA_LINK = "https://go.coincarriere.com/5A6E/2J2C9/?px=1326758045593365&source=fb&visitor_id={fbclid}&fbclid={fbclid}&campaign_id={{campaign.id}}&adset_id={{adset.id}}&ad_id={{ad.id}}&ad_name={{ad.name}}&adset_name={{adset.name}}&campaign_name={{campaign.name}}";
 
 const trackCTAClick = () => {
   if (typeof window !== "undefined" && (window as any).fbq) {
